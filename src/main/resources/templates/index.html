@@ -1,0 +1,25 @@
+<html>
+<head>
+    <meta charset="ISO-8859-1" />
+    <title>User Registration</title>
+</head>
+<body>
+
+<p id="track_data" th:text="${track}" style="visibility: hidden"></p>
+
+<script>
+    fetch('/track', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+        },
+        body: 'data=' + encodeURIComponent(document.getElementById("track_data").textContent)
+    })
+</script>
+
+
+
+<p>Hello !</p>
+
+</body>
+</html>
