@@ -21,20 +21,20 @@ public class TrackingService {
         this.trackingInfoMap = new HashMap<>();
     }
 
-
     public String getTrackingId(String remoteAddress, String userAgent) throws DataEncoder.EncodeException {
         log.info(String.format("Got user agent : %s for address %s", userAgent, remoteAddress));
         TrackingId id = new TrackingId(remoteAddress, userAgent);
-
         return encoder.encode(id);
     }
 
     public TrackingInfo updateTrackingInfo(String encodedTrackingId, int productId) throws DataEncoder.DecodeException {
+
         TrackingId ti = encoder.decode(encodedTrackingId);
 
         if(!this.trackingInfoMap.containsKey(ti)) {
             this.trackingInfoMap.put(ti, new TrackingInfo());
         }
+
         TrackingInfo trackingInfo = this.trackingInfoMap.get(ti);
         trackingInfo.addProductId(productId);
         return trackingInfo;
