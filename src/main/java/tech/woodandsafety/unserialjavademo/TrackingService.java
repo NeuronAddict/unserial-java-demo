@@ -1,5 +1,6 @@
 package tech.woodandsafety.unserialjavademo;
 
+import lombok.extern.slf4j.Slf4j;
 import org.securitywhitepapers.deserialization.LookAheadObjectInputStream;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -8,6 +9,7 @@ import java.io.*;
 import java.util.Base64;
 
 @Service
+@Slf4j
 public class TrackingService {
 
     private final boolean safe;
@@ -22,6 +24,7 @@ public class TrackingService {
     }
 
     public String getTrackingInfo(String remoteAddress, String userAgent) throws IOException {
+        log.info(String.format("Got user agent : %s for address %s", userAgent, remoteAddress));
         TrackingInfo ti = new TrackingInfo(remoteAddress, userAgent, "/");
         try(
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
