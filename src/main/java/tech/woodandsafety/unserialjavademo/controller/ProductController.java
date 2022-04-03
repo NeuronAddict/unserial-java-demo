@@ -38,7 +38,6 @@ public class ProductController {
         Product product = productService.get(productId);
         modelAndView.addObject("product", product);
         modelAndView.addObject("track", encodedTrackingId);
-        modelAndView.addObject("image_src", String.format("/images/%s.jpg", product.getImage()));
         return modelAndView;
     }
 }
