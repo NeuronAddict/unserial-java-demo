@@ -19,7 +19,7 @@ public class HomeController {
 
     @GetMapping
     public String home(HttpServletRequest request, Model model) throws IOException {
-        model.addAttribute("track", trackingService.getTrackingInfo(request.getRemoteAddr(), request.getHeader("User-Agent")));
+        model.addAttribute("track", trackingService.getTrackingId(request.getRemoteAddr(), request.getHeader("User-Agent")));
         return "index";
     }
 
