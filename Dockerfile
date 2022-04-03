@@ -1,8 +1,20 @@
 FROM bitnami/java:11 as build
 
-COPY . .
+RUN mkdir -p /src
 
-RUN ./gradlew build --no-daemon
+WORKDIR /src
+
+COPY gradlew gradlew
+COPY gradle/ gradle/
+
+COPY build.gradle build.gradle
+COPY settings.gradle settings.gradle
+
+RUN ./gradlew downloadDependencies --no-daemon --info
+
+COPY src/ src/
+
+RUN ./gradlew build --no-daemon --info
 
 
 FROM bitnami/java:11-prod
