@@ -21,4 +21,13 @@ class HomeControllerTest {
         mvc.perform(get("/")).andExpect(status().isOk());
     }
 
+    @Test
+    void testAbout() throws Exception {
+        mvc.perform(get("/about")).andExpect(status().isOk());
+    }
+
+    @Test
+    void testContact() throws Exception {
+        mvc.perform(get("/contact")).andExpect(status().isOk());
+    }
 }
