@@ -26,14 +26,14 @@ public class ProductController {
     @GetMapping("/product")
     public ModelAndView products(HttpServletRequest request, @RequestParam(required = false) String trackingData) throws IOException {
         ModelAndView modelAndView = new ModelAndView("products");
-        modelAndView.addObject("track", trackingService.getTrackingInfo(request.getRemoteAddr(), request.getHeader("User-Agent")));
+        modelAndView.addObject("track", trackingService.getTrackingId(request.getRemoteAddr(), request.getHeader("User-Agent")));
         modelAndView.addObject("products", productService.all());
         return modelAndView;
     }
 
     @GetMapping("/product/{id}")
     public ModelAndView product(@RequestParam(required = false) String trackingData, @PathVariable("id") Integer productId) throws IOException, ClassNotFoundException {
-        if(trackingData != null) trackingService.readTrackingInfo(trackingData, productId);
+        if(trackingData != null) trackingService.updateTrackingInfo(trackingData, productId);
         ModelAndView modelAndView = new ModelAndView("product");
         Product product = productService.get(productId);
         modelAndView.addObject("product", product);
