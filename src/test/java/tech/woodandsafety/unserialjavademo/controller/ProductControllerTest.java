@@ -1,4 +1,4 @@
-package tech.woodandsafety.unserialjavademo;
+package tech.woodandsafety.unserialjavademo.controller;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,6 +8,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
+import tech.woodandsafety.unserialjavademo.bean.Product;
+import tech.woodandsafety.unserialjavademo.service.ProductService;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -42,7 +44,7 @@ public class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("<div class=\"product_box\">")))
                 .andExpect(content().string(containsString("<figure><img src=\"/images/image1.png\" alt=\"#\"/></figure>")))
-                .andExpect(content().string(containsString("<a href=\"/product/1?trackingData=rO0ABXNyADB0ZWNoLndvb2RhbmRzYWZldHkudW5zZXJpYWxqYXZhZGVtby5UcmFja2luZ0luZm8EDF9ZH%2BY/%2BgIABEkACXByb2R1Y3RJZEwAAmlwdAASTGphdmEvbGFuZy9TdHJpbmc7TAADdXJscQB%2BAAFMAAl1c2VyQWdlbnRxAH4AAXhwAAAAAHQACTEyNy4wLjAuMXQAAS9w\"><h3>product1</h3></a>")));
+                .andExpect(content().string(containsString("<a href=\"/product/1?trackingData=rO0ABXNyADV0ZWNoLndvb2RhbmRzYWZldHkudW5zZXJpYWxqYXZhZGVtby5iZWFuLlRyYWNraW5nSW5mbylNkYRWjgmhAgAESQAJcHJvZHVjdElkTAACaXB0ABJMamF2YS9sYW5nL1N0cmluZztMAAN1cmxxAH4AAUwACXVzZXJBZ2VudHEAfgABeHAAAAAAdAAJMTI3LjAuMC4xdAABL3A%3D\"><h3>product1</h3></a>")));
     }
 
     @Test
