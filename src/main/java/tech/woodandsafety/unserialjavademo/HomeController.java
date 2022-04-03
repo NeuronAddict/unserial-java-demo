@@ -6,27 +6,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.*;
-import java.util.Base64;
+import java.io.IOException;
 
 @Slf4j
-@Controller
+@Controller("/")
 public class HomeController {
+
+    private final TrackingService trackingService;
+
+    public HomeController(TrackingService trackingService) {
+        this.trackingService = trackingService;
+    }
 
     @GetMapping
     public String home(HttpServletRequest request, Model model) throws IOException {
-
         log.info(String.format("Got user agent : %s", request.getHeader("User-Agent")));
-
-        TrackingInfo ti = new TrackingInfo(request.getRemoteAddr(), request.getHeader("User-Agent"), "/");
-        try(
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                ObjectOutputStream oos = new ObjectOutputStream(bos);
-        ){
-            oos.writeObject(ti);
-            String encoded = new String(Base64.getEncoder().encode(bos.toByteArray()));
-            model.addAttribute("track", encoded);
-        }
+        model.addAttribute("track", trackingService.getTrackingInfo(request.getRemoteAddr(), request.getHeader("User-Agent")));
         return "index";
     }
 }
