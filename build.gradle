@@ -47,3 +47,9 @@ configurations.implementation {
 tasks.named('test') {
     useJUnitPlatform()
 }
+
+task downloadDependencies {
+    doLast {
+        configurations.findAll{it.canBeResolved}.each{it.resolve()}
+    }
+}
