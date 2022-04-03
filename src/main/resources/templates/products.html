@@ -28,7 +28,7 @@
                         <div class="col-md-4 margin_bottom1" th:each="product : ${products}" th:object="${product}">
                            <div class="product_box">
                               <figure><img th:src="@{'/images/' + *{image} + '.png'}" alt="#"/></figure>
-                              <a th:href="@{'/product/'+${product.id}(trackingData=${track})}"><h3 th:text="*{name}">Computer</h3></a>
+                              <a th:href="@{'/product/'+${product.id}(encodedTrackingId=${track})}"><h3 th:text="*{name}">Computer</h3></a>
                            </div>
                         </div>
                         <div class="col-md-12">
