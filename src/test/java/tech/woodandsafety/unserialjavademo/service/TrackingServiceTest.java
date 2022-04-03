@@ -3,8 +3,8 @@ package tech.woodandsafety.unserialjavademo.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import tech.woodandsafety.unserialjavademo.bean.TrackingInfo;
-
-import java.io.IOException;
+import tech.woodandsafety.unserialjavademo.tools.DataEncoder;
+import tech.woodandsafety.unserialjavademo.tools.SerializeEncoder;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,11 +14,11 @@ class TrackingServiceTest {
 
     @BeforeEach
     public void setUp() {
-        trackingService = new TrackingService(true);
+        trackingService = new TrackingService(new SerializeEncoder<>());
     }
 
     @Test
-    public void testTrackingIdGet() throws IOException, ClassNotFoundException {
+    public void testTrackingIdGet() throws DataEncoder.DecodeException, DataEncoder.EncodeException {
         String base64 = this.trackingService.getTrackingId("127.0.0.1", "mozilla");
         this.trackingService.updateTrackingInfo(base64, 1);
         TrackingInfo ti = this.trackingService.updateTrackingInfo(base64, 2);
