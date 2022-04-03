@@ -40,10 +40,6 @@ configurations {
     }
 }
 
-configurations.implementation {
-    exclude group: 'ch.qos.logback:'
-}
-
 tasks.named('test') {
     useJUnitPlatform()
 }
