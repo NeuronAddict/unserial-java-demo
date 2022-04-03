@@ -42,7 +42,7 @@ public class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("<div class=\"product_box\">")))
                 .andExpect(content().string(containsString("<figure><img src=\"/images/image1.png\" alt=\"#\"/></figure>")))
-                .andExpect(content().string(containsString("<a href=\"/product/1\"><h3>product1</h3></a>")));
+                .andExpect(content().string(containsString("<a href=\"/product/1?trackingData=rO0ABXNyADB0ZWNoLndvb2RhbmRzYWZldHkudW5zZXJpYWxqYXZhZGVtby5UcmFja2luZ0luZm8EDF9ZH%2BY/%2BgIABEkACXByb2R1Y3RJZEwAAmlwdAASTGphdmEvbGFuZy9TdHJpbmc7TAADdXJscQB%2BAAFMAAl1c2VyQWdlbnRxAH4AAXhwAAAAAHQACTEyNy4wLjAuMXQAAS9w\"><h3>product1</h3></a>")));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("<h2>product1</h2>")))
                 .andExpect(content().string(containsString("<p>description1</p>")))
-                .andExpect(content().string(containsString("<img src=\"/images/image1.jpg\"")))
+                .andExpect(content().string(containsString("<img src=\"/images/image1.png\"")))
 
         ;
     }
