@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @Controller
@@ -20,8 +21,9 @@ public class ProductController {
     }
 
     @GetMapping("/product")
-    public ModelAndView products(@RequestParam(required = false) String trackingData) throws IOException, ClassNotFoundException {
+    public ModelAndView products(HttpServletRequest request, @RequestParam(required = false) String trackingData) throws IOException, ClassNotFoundException {
         ModelAndView modelAndView = new ModelAndView("products");
+        modelAndView.addObject("track", trackingService.getTrackingInfo(request.getRemoteAddr(), request.getHeader("User-Agent")));
         modelAndView.addObject("products", productService.all());
         return modelAndView;
     }
