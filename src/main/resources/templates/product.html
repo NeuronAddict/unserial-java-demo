@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+   <head th:insert="header :: head">
+   </head>
+   <!-- body -->
+   <body class="main-layout inner_posituong computer_page">
+      <!-- loader  -->
+      <div class="loader_bg">
+         <div class="loader"><img src="/images/loading.gif" alt="#" /></div>
+      </div>
+      <!-- end loader -->
+      <header th:insert="header :: header"></header>
+
+      <!-- laptop1 -->
+      <div class="laptop1" th:object="${product}">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-7">
+                  <div class="laptop1_img">
+                     <figure><img th:src="@{'/images/' + *{image} + '.png'}" alt="#"/></figure>
+                  </div>
+               </div>
+               <div class="col-md-5">
+                  <div class="titlepage">
+                     <h2 th:text="*{name}"></h2>
+                     <p th:text="*{description}"></p>
+                     <a class="read_more" href="#">Buy</a>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end laptop1 -->
+      <footer th:insert="footer :: footer"></footer>
+      <div th:replace="footer :: javascript" ></div>
+   </body>
+</html>
+
