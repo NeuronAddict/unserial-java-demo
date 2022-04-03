@@ -19,6 +19,6 @@ RUN ./gradlew build --no-daemon --info
 
 FROM bitnami/java:11-prod
 
-COPY --from=build build/libs/unserial-java-demo-0.0.1-SNAPSHOT.jar app.jar
+COPY --from=build /src/build/libs/unserial-java-demo-*-SNAPSHOT.jar app.jar
 
 CMD ["java", "-jar", "app.jar"]
