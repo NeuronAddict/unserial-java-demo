@@ -24,7 +24,7 @@ public class ProductControllerTest {
     @BeforeEach
     void setUp() {
         Mockito.when(productService.get(1))
-                .thenReturn(new Product(1, "product1", "description1", "image"));
+                .thenReturn(new Product(1, "product1", "description1", "image1"));
 
         Mockito.when(productService.all())
                 .thenReturn(new Product[] {
@@ -40,11 +40,9 @@ public class ProductControllerTest {
     void testProducts() throws Exception {
         mvc.perform(get("/product"))
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("<h2>product1</h2>")))
-                .andExpect(content().string(containsString("<p>description1</p>")))
-                .andExpect(content().string(containsString("<img src=\"/images/image.jpg\"")))
-
-        ;
+                .andExpect(content().string(containsString("<div class=\"product_box\">")))
+                .andExpect(content().string(containsString("<figure><img src=\"/images/image1.png\" alt=\"#\"/></figure>")))
+                .andExpect(content().string(containsString("<a href=\"/product/1\"><h3>product1</h3></a>")));
     }
 
     @Test
@@ -53,7 +51,7 @@ public class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("<h2>product1</h2>")))
                 .andExpect(content().string(containsString("<p>description1</p>")))
-                .andExpect(content().string(containsString("<img src=\"/images/image.jpg\"")))
+                .andExpect(content().string(containsString("<img src=\"/images/image1.jpg\"")))
 
         ;
     }
