@@ -44,7 +44,8 @@ public class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("<div class=\"product_box\">")))
                 .andExpect(content().string(containsString("<figure><img src=\"/images/image1.png\" alt=\"#\"/></figure>")))
-                .andExpect(content().string(containsString("<a href=\"/product/1?trackingData=rO0ABXNyADV0ZWNoLndvb2RhbmRzYWZldHkudW5zZXJpYWxqYXZhZGVtby5iZWFuLlRyYWNraW5nSW5mbylNkYRWjgmhAgAESQAJcHJvZHVjdElkTAACaXB0ABJMamF2YS9sYW5nL1N0cmluZztMAAN1cmxxAH4AAUwACXVzZXJBZ2VudHEAfgABeHAAAAAAdAAJMTI3LjAuMC4xdAABL3A%3D\"><h3>product1</h3></a>")));
+                .andExpect(content().string(containsString("<a href=\"/product/1?trackingData=")))
+                .andExpect(content().string(containsString("\"><h3>product1</h3></a>")));
     }
 
     @Test
