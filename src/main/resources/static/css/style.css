@@ -369,13 +369,13 @@ ul.btn li:last-child {
      z-index: 999;
 }
 
-.logo a {
-     font-size: 40px;
-     font-weight: bold;
-     text-transform: uppercase;
-     color: #fff;
-     line-height: 40px;
-}
+/*.logo a {*/
+/*     font-size: 40px;*/
+/*     font-weight: bold;*/
+/*     text-transform: uppercase;*/
+/*     color: #fff;*/
+/*     line-height: 40px;*/
+/*}*/
 
 
 /** banner section **/
@@ -1078,6 +1078,20 @@ ul.social_icon li a:hover {
 .laptop1_img figure img {
      width: 100%;
 }
+
+div.github {
+     font-weight: bold;
+     font-size: medium;
+     color: white;
+}
+
+a.github {
+     font-weight: bold;
+     font-size: medium;
+     color: white;
+}
+
+
 
 
 /** end laptop **/
