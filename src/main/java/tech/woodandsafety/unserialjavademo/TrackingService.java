@@ -2,21 +2,17 @@ package tech.woodandsafety.unserialjavademo;
 
 import org.securitywhitepapers.deserialization.LookAheadObjectInputStream;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Service;
 
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
+import java.io.*;
 import java.util.Base64;
 
-@RestController("/")
-public class TrackingController {
+@Service
+public class TrackingService {
 
     private final boolean safe;
 
-    public TrackingController(@Value("${tech.woodandsafety.unserial.safe}") boolean safe) {
+    public TrackingService(@Value("${tech.woodandsafety.unserial.safe}") boolean safe) {
         this.safe = safe;
     }
 
@@ -25,8 +21,18 @@ public class TrackingController {
         else return new ObjectInputStream(bis);
     }
 
-    @PostMapping("track")
-    public void sendTrackingInfo(@RequestParam String data) throws IOException, ClassNotFoundException {
+    public String getTrackingInfo(String remoteAddress, String userAgent) throws IOException {
+        TrackingInfo ti = new TrackingInfo(remoteAddress, userAgent, "/");
+        try(
+                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                ObjectOutputStream oos = new ObjectOutputStream(bos);
+        ){
+            oos.writeObject(ti);
+            return new String(Base64.getEncoder().encode(bos.toByteArray()));
+        }
+    }
+
+    public void readTrackingInfo(String data, int productId) throws IOException, ClassNotFoundException {
         byte[] decoded = Base64.getDecoder().decode(data);
 
         try(
@@ -34,9 +40,9 @@ public class TrackingController {
             ObjectInputStream ois = getObjectInputStream(bis, safe)) {
             Object o = ois.readObject();
             TrackingInfo ti = (TrackingInfo) o;
-
+            ti.setProductId(productId);
             System.out.println(ti);
-            // send ti...
+            // send ti to tracking system ...
         }
     }
 }
