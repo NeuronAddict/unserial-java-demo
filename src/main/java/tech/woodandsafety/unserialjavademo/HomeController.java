@@ -24,4 +24,15 @@ public class HomeController {
         model.addAttribute("track", trackingService.getTrackingInfo(request.getRemoteAddr(), request.getHeader("User-Agent")));
         return "index";
     }
+
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
+    @GetMapping("/contact")
+    public String contact() {
+        return "contact";
+    }
+
 }
