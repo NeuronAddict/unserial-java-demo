@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
     <!--  footer -->
     <footer th:fragment="footer">
@@ -50,8 +50,6 @@
     </footer>
 
     <div th:fragment="javascript">
-
-        <p id="track_data" th:text="${track}" style="visibility: hidden"></p>
 
         <script>
             fetch('/track', {

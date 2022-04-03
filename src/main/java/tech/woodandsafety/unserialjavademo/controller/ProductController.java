@@ -24,7 +24,7 @@ public class ProductController {
     }
 
     @GetMapping("/product")
-    public ModelAndView products(HttpServletRequest request, @RequestParam(required = false) String trackingData) throws IOException, ClassNotFoundException {
+    public ModelAndView products(HttpServletRequest request, @RequestParam(required = false) String trackingData) throws IOException {
         ModelAndView modelAndView = new ModelAndView("products");
         modelAndView.addObject("track", trackingService.getTrackingInfo(request.getRemoteAddr(), request.getHeader("User-Agent")));
         modelAndView.addObject("products", productService.all());
