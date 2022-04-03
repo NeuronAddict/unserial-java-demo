@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import tech.woodandsafety.unserialjavademo.bean.TrackingInfo;
-import tech.woodandsafety.unserialjavademo.tools.LookAheadObjectInputStream;
+import tech.woodandsafety.unserialjavademo.tools.SafeObjectInputStream;
 
 import java.io.*;
 import java.util.Base64;
@@ -20,7 +20,7 @@ public class TrackingService {
     }
 
     private ObjectInputStream getObjectInputStream(ByteArrayInputStream bis, boolean safe) throws IOException {
-        if(safe) return new LookAheadObjectInputStream(bis);
+        if(safe) return new SafeObjectInputStream<>(bis, TrackingInfo.class);
         else return new ObjectInputStream(bis);
     }
 
@@ -29,7 +29,7 @@ public class TrackingService {
         TrackingInfo ti = new TrackingInfo(remoteAddress, userAgent, "/");
         try(
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                ObjectOutputStream oos = new ObjectOutputStream(bos);
+                ObjectOutputStream oos = new ObjectOutputStream(bos)
         ){
             oos.writeObject(ti);
             return new String(Base64.getEncoder().encode(bos.toByteArray()));
