@@ -20,12 +20,14 @@ public class ProductController {
     }
 
     @GetMapping("/product")
-    public String index(@RequestParam(required = false) String trackingData) throws IOException, ClassNotFoundException {
-        return "products";
+    public ModelAndView products(@RequestParam(required = false) String trackingData) throws IOException, ClassNotFoundException {
+        ModelAndView modelAndView = new ModelAndView("products");
+        modelAndView.addObject("products", productService.all());
+        return modelAndView;
     }
 
     @GetMapping("/product/{id}")
-    public ModelAndView index(@RequestParam(required = false) String trackingData, @PathVariable("id") Integer productId) throws IOException, ClassNotFoundException {
+    public ModelAndView product(@RequestParam(required = false) String trackingData, @PathVariable("id") Integer productId) throws IOException, ClassNotFoundException {
         if(trackingData != null) trackingService.readTrackingInfo(trackingData, productId);
         ModelAndView modelAndView = new ModelAndView("product");
         Product product = productService.get(productId);
