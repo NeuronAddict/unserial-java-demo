@@ -1,4 +1,4 @@
-package tech.woodandsafety.unserialjavademo;
+package tech.woodandsafety.unserialjavademo.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
