@@ -11,16 +11,19 @@ public class DemoProductService implements ProductService {
     private final Map<Integer, Product> products;
 
     public DemoProductService() {
+
+        String lorem = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sodales ut massa id elementum. Fusce convallis nec nulla vitae congue. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla quam odio, suscipit sed faucibus sed, maximus eget ligula. Cras ornare metus id erat placerat, sit amet ullamcorper nisl blandit. Morbi et ante nec ex dignissim commodo. Etiam elementum magna vel massa blandit, vitae accumsan orci ultricies.";
+
         products = new HashMap<>();
-        products.put(1, new Product(1, "keyboard", "bla", "product1"));
-        products.put(2, new Product(2, "mouse", "bla", "product2"));
-        products.put(3, new Product(3, "webcam", "bla", "product3"));
-        products.put(4, new Product(4, "speakers", "bla", "product4"));
-        products.put(5, new Product(5, "router", "bla", "product5"));
-        products.put(6, new Product(6, "hard disk", "bla", "product6"));
-        products.put(7, new Product(7, "rams", "bla", "product7"));
-        products.put(8, new Product(8, "bettery", "bla", "product8"));
-        products.put(9, new Product(9, "drive", "bla", "product9"));
+        products.put(1, new Product(1, "keyboard", lorem, "product1"));
+        products.put(2, new Product(2, "mouse", lorem, "product2"));
+        products.put(3, new Product(3, "webcam", lorem, "product3"));
+        products.put(4, new Product(4, "speakers", lorem, "product4"));
+        products.put(5, new Product(5, "router", lorem, "product5"));
+        products.put(6, new Product(6, "hard disk", lorem, "product6"));
+        products.put(7, new Product(7, "rams", lorem, "product7"));
+        products.put(8, new Product(8, "bettery", lorem, "product8"));
+        products.put(9, new Product(9, "drive", lorem, "product9"));
     }
 
     @Override
