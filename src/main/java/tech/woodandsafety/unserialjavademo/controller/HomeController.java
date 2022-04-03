@@ -1,8 +1,9 @@
-package tech.woodandsafety.unserialjavademo;
+package tech.woodandsafety.unserialjavademo.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import tech.woodandsafety.unserialjavademo.service.TrackingService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;

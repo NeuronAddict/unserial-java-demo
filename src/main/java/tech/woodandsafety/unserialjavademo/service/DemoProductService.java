@@ -1,6 +1,7 @@
-package tech.woodandsafety.unserialjavademo;
+package tech.woodandsafety.unserialjavademo.service;
 
 import org.springframework.stereotype.Service;
+import tech.woodandsafety.unserialjavademo.bean.Product;
 
 import java.util.HashMap;
 import java.util.Map;
