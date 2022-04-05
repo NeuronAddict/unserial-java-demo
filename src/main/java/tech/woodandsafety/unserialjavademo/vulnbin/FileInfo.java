@@ -9,9 +9,14 @@ import java.io.*;
 @EqualsAndHashCode
 public class FileInfo implements Serializable {
 
-    private final String filename;
+    private String filename;
     private String fileType;
 
+    /**
+     *  /!\ Don't call with user controlled data /!\
+     * @param filename
+     * @throws IOException
+     */
     public FileInfo(String filename) throws IOException {
         this.filename = filename;
         initFileInfo(filename);
@@ -42,7 +47,7 @@ public class FileInfo implements Serializable {
     }
 
     private void readObject(final ObjectInputStream in) throws IOException, ClassNotFoundException {
-        String filename = (String) in.readObject();
+        this.filename = (String) in.readObject();
         initFileInfo(filename);
     }
 
