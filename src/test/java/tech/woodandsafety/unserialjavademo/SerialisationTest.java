@@ -1,7 +1,7 @@
 package tech.woodandsafety.unserialjavademo;
 
 import org.junit.jupiter.api.Test;
-import tech.woodandsafety.unserialjavademo.bean.TrackingInfo;
+import tech.woodandsafety.unserialjavademo.bean.TrackingId;
 import tech.woodandsafety.unserialjavademo.tools.SafeObjectInputStream;
 
 import java.io.*;
@@ -15,7 +15,7 @@ public class SerialisationTest {
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
              ObjectOutputStream oos = new ObjectOutputStream(bos)) {
 
-            TrackingInfo ti = new TrackingInfo("127.0.0.1", "mozilla", "http://localhost");
+            TrackingId ti = new TrackingId("127.0.0.1", "mozilla");
 
             oos.writeObject(ti);
 
@@ -35,7 +35,7 @@ public class SerialisationTest {
         try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
              ObjectOutputStream oos = new ObjectOutputStream(bos)) {
 
-            TrackingInfo ti = new TrackingInfo("127.0.0.1", "mozilla", "http://localhost");
+            TrackingId ti = new TrackingId("127.0.0.1", "mozilla");
 
             oos.writeObject(ti);
 
@@ -43,6 +43,27 @@ public class SerialisationTest {
                  ObjectInputStream ois = new SafeObjectInputStream<>(bis, String.class)) {
 
                 assertThrows(InvalidClassException.class, ois::readObject);
+
+            }
+        }
+    }
+
+    @Test
+    public void testSafeUnserial() throws IOException, ClassNotFoundException {
+        try (ByteArrayOutputStream bos = new ByteArrayOutputStream();
+             ObjectOutputStream oos = new ObjectOutputStream(bos)) {
+
+            TrackingId ti = new TrackingId("127.0.0.1", "mozilla");
+
+            oos.writeObject(ti);
+
+            try (ByteArrayInputStream bis = new ByteArrayInputStream(bos.toByteArray());
+                 ObjectInputStream ois = new SafeObjectInputStream<>(bis, TrackingId.class)) {
+
+                Object unserialized = ois.readObject();
+
+                assertEquals(unserialized, ti);
+                assertNotSame(unserialized, ti);
 
             }
         }
