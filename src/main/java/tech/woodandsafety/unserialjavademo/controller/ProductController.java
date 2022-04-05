@@ -8,9 +8,9 @@ import org.springframework.web.servlet.ModelAndView;
 import tech.woodandsafety.unserialjavademo.bean.Product;
 import tech.woodandsafety.unserialjavademo.service.ProductService;
 import tech.woodandsafety.unserialjavademo.service.TrackingService;
+import tech.woodandsafety.unserialjavademo.tools.DataEncoder;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 
 @Controller
 public class ProductController {
@@ -24,21 +24,20 @@ public class ProductController {
     }
 
     @GetMapping("/product")
-    public ModelAndView products(HttpServletRequest request, @RequestParam(required = false) String trackingData) throws IOException {
+    public ModelAndView products(HttpServletRequest request, @RequestParam(required = false) String trackingData) throws DataEncoder.EncodeException {
         ModelAndView modelAndView = new ModelAndView("products");
-        modelAndView.addObject("track", trackingService.getTrackingInfo(request.getRemoteAddr(), request.getHeader("User-Agent")));
+        modelAndView.addObject("track", trackingService.getTrackingId(request.getRemoteAddr(), request.getHeader("User-Agent")));
         modelAndView.addObject("products", productService.all());
         return modelAndView;
     }
 
     @GetMapping("/product/{id}")
-    public ModelAndView product(@RequestParam(required = false) String trackingData, @PathVariable("id") Integer productId) throws IOException, ClassNotFoundException {
-        if(trackingData != null) trackingService.readTrackingInfo(trackingData, productId);
+    public ModelAndView product(@RequestParam(required = false) String encodedTrackingId, @PathVariable("id") Integer productId) throws DataEncoder.DecodeException {
+        if(encodedTrackingId != null) trackingService.updateTrackingInfo(encodedTrackingId, productId);
         ModelAndView modelAndView = new ModelAndView("product");
         Product product = productService.get(productId);
         modelAndView.addObject("product", product);
-        modelAndView.addObject("track", trackingData);
-        modelAndView.addObject("image_src", String.format("/images/%s.jpg", product.getImage()));
+        modelAndView.addObject("track", encodedTrackingId);
         return modelAndView;
     }
 }
