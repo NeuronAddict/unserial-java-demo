@@ -47,6 +47,4 @@ public class SerializeEncoder<T> implements DataEncoder<T> {
             throw new DecodeException(e);
         }
     }
-
-
 }
