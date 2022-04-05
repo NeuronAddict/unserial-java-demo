@@ -26,8 +26,8 @@ public class ProductController {
     @GetMapping("/product")
     public ModelAndView products(HttpServletRequest request, @RequestParam(required = false) String trackingData) throws DataEncoder.EncodeException {
         ModelAndView modelAndView = new ModelAndView("products");
-        modelAndView.addObject("track", trackingService.getTrackingId(request.getRemoteAddr(), request.getHeader("User-Agent")));
         modelAndView.addObject("products", productService.all());
+        modelAndView.addObject("track", trackingService.getTrackingId(request.getRemoteAddr(), request.getHeader("User-Agent")));
         return modelAndView;
     }
 
