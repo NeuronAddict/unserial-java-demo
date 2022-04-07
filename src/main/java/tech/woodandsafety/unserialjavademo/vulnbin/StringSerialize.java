@@ -7,7 +7,7 @@ public final class StringSerialize {
 
     public static void main(String[] args) throws DataEncoder.EncodeException {
         SerializeEncoder<String> encoder = new SerializeEncoder<>();
-        System.out.println(encoder.encode("coucou"));
+        System.out.println(encoder.encode("I'm just some innocent chars..."));
     }
 
 }
