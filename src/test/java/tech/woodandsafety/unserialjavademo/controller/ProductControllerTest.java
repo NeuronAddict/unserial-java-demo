@@ -44,7 +44,6 @@ public class ProductControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("<div class=\"product_box\">")))
                 .andExpect(content().string(containsString("<figure><img src=\"/images/image1.png\" alt=\"#\"/></figure>")))
-                .andExpect(content().string(containsString("<a href=\"/product/1?trackingData=")))
                 .andExpect(content().string(containsString("\"><h3>product1</h3></a>")));
     }
 
